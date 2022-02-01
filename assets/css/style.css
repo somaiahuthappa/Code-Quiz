@@ -1,7 +1,7 @@
 * {
     padding:0;
     margin:0;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
 
 body{
@@ -98,12 +98,12 @@ header h1 {
     opacity: 0.6;
 }
 
-.btn .wrong {
+.btn-wrong {
 background-color: red;
 color: white;
 }
 
-.btn .correct {
+.btn-correct {
     background-color: darkgreen;
     color: white;
 }
@@ -134,3 +134,22 @@ color: white;
     display: none;
 }
 
+.score-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 10px;
+}
+
+.score-submit-btn {
+    padding: 5px 10px;
+    border: solid grey 3px;
+    border-radius: 5px;
+    font-size: 17px;
+}
+
+.inputInitials {
+    padding: 12px 20px;
+    margin: 10px 0;
+}

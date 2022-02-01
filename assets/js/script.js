@@ -130,24 +130,53 @@ function checkAnswer(selectedAns, correctAns) {
 
     // If Correct
     if (selectedAns === correctAns) {
-        score += 5
-        scoreCounter()
+        score += 5;
+        scoreCounter();
+        // // not working
+        // selectedAns.setAttribute('class', 'btn-correct');
     }
     else {
         // TODO Reduce Timer
     }
 
+    
+    // // not working
+    // if (selectedAns != correctAns) {
+    //     selectedAns.setAttribute('class', 'btn-wrong');
+    // }
+
     // Increment to next question
-    questAsked += 1
+    questAsked += 1;
 
     // Show next question ony if maximum number of questions has not been reached
     if (questions.length === questAsked)
-        showScorePage()
+        showScorePage();
     else
         showQuestion();
 }
 
 function showScorePage() {
     console.log("Done");
+    timerEl.classList.add('hide');
+    questionWrapperEl.classList.add('hide')
+    scoreTimerEl.setAttribute("class", "score-page")
+    var textBox = document.createElement("input");
+    textBox.setAttribute("type", "text");
+    textBox.setAttribute("placeholder", "Your Initials");
+    textBox.setAttribute("class", "inputInitials")
+    // textBox.innerText = "Enter Your Initials " + textBox;
+    var submitBtn = document.createElement("button");
+    submitBtn.setAttribute("text", "submit");
+    submitBtn.innerText = "Submit";
+    submitBtn.setAttribute("class", "score-submit-btn");
+
+    scoreTimerEl.appendChild(textBox);
+    scoreTimerEl.appendChild(submitBtn);
+
+    submitBtn.addEventListener("click", setInitials);
 }
 // showQuestion(questions[0]);
+
+function setInitials() {
+    localStorage.setItem("score", JSON.stringify(score));
+}
