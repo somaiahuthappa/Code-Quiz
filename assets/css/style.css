@@ -8,19 +8,44 @@ body{
     height:100vw;
     width: 100vw;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
+    background-color: lightgrey;
     
 
 }
+
 
 header {
     display:flex;
     align-items: center;
     justify-content: center;
-    color: navy;
+    
+    
 
+}
+
+header h1 {
+    padding: 20px;
+    font-size: 48px;
+    color: navy;
+}
+
+.intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro p {
+    width: 70%;
+    line-height: 1.5;
+    font-size: 20px;
+    padding: 20px;
+    background-color: lightblue;
+    border-radius: 5px;
+    border: solid grey 5px;
 }
 
 .score-timer-wrapper {
@@ -36,7 +61,7 @@ header {
     height: 600px;
     max-height: 60%;
     background-color: lightblue;
-    margin: solid, blue, 5px;
+    border: 5px solid darkblue;
     border-radius: 5%;
     padding: 20px;
     display: flex;
@@ -48,7 +73,8 @@ header {
 .question-wrapper .question {
     background-color: white;
     margin: 20px;
-    border: solid, grey, 3px;
+    border: 3px solid grey;
+    border-radius: 20px;
     padding: 20px;
 
 }
@@ -60,8 +86,51 @@ header {
 
 .answer-list button {
     padding: 20px;
-    border: solid, grey, 3px;
-    border-radius: 3px;
+    border: 3px solid grey ;
+    border-radius: 20px;
     margin: 20px;
-
+    font-size: 18px;
+    font-weight: 600;
 }
+
+.answer-list button:hover {
+    background-color:darksalmon;
+    opacity: 0.6;
+}
+
+.btn .wrong {
+background-color: red;
+color: white;
+}
+
+.btn .correct {
+    background-color: darkgreen;
+    color: white;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+}
+
+.controls-btn {
+    padding: 10px 20px;
+    border: solid grey 3px;
+    border-radius: 20px;
+    margin: 20px;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.controls-btn:hover {
+    opacity: 0.6;
+    background-color:lightpink;
+}
+
+.hide {
+    display: none;
+}
+

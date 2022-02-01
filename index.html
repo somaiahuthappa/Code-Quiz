@@ -15,37 +15,48 @@
         <header>
             <h1>Code Quiz</h1>
         </header>
-        <main class="main-content" id="hide">
+        <main class="main-content" id="main-content">
+            <section id="intro" class="intro">
+                <p>Welcome to the Code Quiz. When you click the right answer, the button will turn <span
+                        style="color:darkgreen">GREEN</span> and you get 5 points. If you choose the wrong answer, the
+                    button turns <span style="color: red">RED</span> and you loose 10 seconds on the timer. You have 2 minutes to complete the quiz. At the end
+                    of the quiz, your score will be displayed and you can view the high score.</p>
+            </section>
 
-            <section class="score-timer-wrapper">
+            <section class="score-timer-wrapper hide" id="score-timer-wrapper">
                 <span class="score">
-                    <h2 id="score">Score</h2>
+                    <h2 id="score">Score:</h2>
                 </span>
                 <span class="timer">
-                    <h2 id="timer">Timer</h2>
+                    <h2 id="timer"></h2>
                 </span>
             </section>
 
-            <section class="question-wrapper">
-                <h3 class="question">Question</h3>
-                <div class="answer-list">
+            <section class="question-wrapper hide" id="question-wrapper">
+                <h3 class="question" id="question">Question</h3>
+                <div class="answer-list" id="answer-list">
 
-                    <button class="btn">Answer1</button>
+                    <button class="btn" id="answerA">Answer1</button>
 
-                    <button class="btn">Answer2</button>
+                    <button class="btn" id="answerB">Answer2</button>
 
-                    <button class="btn">Answer3</button>
+                    <button class="btn" id="answerC">Answer3</button>
 
-                    <button class="btn">Answer4</button>
+                    <button class="btn" id="answerD">Answer4</button>
 
                 </div>
             </section>
 
-            <section class=controls>
-                <button id="start">Start</button>
-                <button type="submit" id="submit" class="submit-btn controls-btn"></button>
-                <button id="go-back" class="go-back-btn controls-btn">Go Back</button>
-                <button id="clear-high-score" class="clear-high-score-btn controls-btn">Clear</button>
+            <section class="controls" id="controls">
+
+                <button id="start" class="controls-btn">Start</button>
+
+                <button id="submit" class="submit-btn controls-btn hide">Submit</button>
+
+                <button id="clear-high-score" class="clear-high-score-btn controls-btn hide">Clear</button>
+
+                <button id="go-back" class="go-back-btn controls-btn hide">Go Back</button>
+
             </section>
 
         </main>
