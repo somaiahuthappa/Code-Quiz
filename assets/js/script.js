@@ -1,14 +1,14 @@
 var score = 0;
 var questAsked = 0;
-
-
+let time = 40; //seconds
+var showScorePageFlag = false;
 
 var questions = [
     {
         question: 'How to align an element to the top of its parent in CSS?',
         answers: {
-            a: 'text-align:top',
-            b: "margin-align:top",
+            a: 'text-align: top',
+            b: "margin-align: top",
             c: "overflow-top",
             d: "vertical-align: top",
         },
@@ -80,7 +80,7 @@ function start() {
     introEl.classList.add('hide');
     scoreTimerEl.classList.remove('hide');
     questionWrapperEl.classList.remove('hide');
-    countdown();
+    countDown();
     scoreCounter();
     showQuestion();
 
@@ -90,23 +90,23 @@ function scoreCounter() {
     scoreEl.innerHTML = "Score: " + score;
 }
 
-function countdown() {
-    var startingMinutes = 2;
-    let time = startingMinutes * 60;
-    var timer = setInterval(function function1() {
+function countDown() {
+    var timer = setInterval(function function1() { 
+        timerEl.innerHTML = "Timer: " + time + " seconds";
+        time-=1 
 
-        const minutes = Math.floor(time / 60);
-        let seconds = time % 60;
-
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-        timerEl.innerHTML = "Timer: " + `${minutes}:${seconds}`;
-        time--;
-
-        time -= 0;
-        if (time <= 0) {
-            clearInterval(timer);
+        if (time <= -1) {
+            clearInterval(timer);            
+            showScorePageFlag = true;
+            showScorePage();
         }
+         
     }, 1000);
+
+}
+
+function reduceTime() {
+    time -= 10
 }
 
 function showQuestion() {
@@ -119,64 +119,138 @@ function showQuestion() {
     answerC.innerText = questions[questAsked].answers["c"];
     answerD.innerText = questions[questAsked].answers["d"];
 
+    // Reset Class
+    answerA.setAttribute('class', '');
+    answerB.setAttribute('class', '');
+    answerC.setAttribute('class', '');
+    answerD.setAttribute('class', '');
+
     // Add OnClick
-    answerA.setAttribute("onclick", "checkAnswer('a', questions[questAsked].correct)");
-    answerB.setAttribute("onclick", "checkAnswer('b', questions[questAsked].correct)");
-    answerC.setAttribute("onclick", "checkAnswer('c', questions[questAsked].correct)");
-    answerD.setAttribute("onclick", "checkAnswer('d', questions[questAsked].correct)");
+    answerA.setAttribute("onclick", "checkAnswer('a', questions[questAsked].correct, answerA)");
+    answerB.setAttribute("onclick", "checkAnswer('b', questions[questAsked].correct, answerB)");
+    answerC.setAttribute("onclick", "checkAnswer('c', questions[questAsked].correct, answerC)");
+    answerD.setAttribute("onclick", "checkAnswer('d', questions[questAsked].correct, answerD)");
 }
 
-function checkAnswer(selectedAns, correctAns) {
+function checkAnswer(selectedAns, correctAns, correctElement) {
 
     // If Correct
     if (selectedAns === correctAns) {
         score += 5;
         scoreCounter();
-        // // not working
-        // selectedAns.setAttribute('class', 'btn-correct');
+
     }
     else {
-        // TODO Reduce Timer
-    }
+        reduceTime();
+    };
 
-    
-    // // not working
-    // if (selectedAns != correctAns) {
-    //     selectedAns.setAttribute('class', 'btn-wrong');
-    // }
 
     // Increment to next question
     questAsked += 1;
 
-    // Show next question ony if maximum number of questions has not been reached
-    if (questions.length === questAsked)
+    // Show next question only if maximum number of questions has not been reached
+    if ((questions.length === questAsked) || (time <= -1 )) {
+        
+        showScorePageFlag = true;
         showScorePage();
-    else
+        // showScorePageFlag = true;
+        
+    }
+    else {
         showQuestion();
+    };
 }
 
 function showScorePage() {
-    console.log("Done");
-    timerEl.classList.add('hide');
-    questionWrapperEl.classList.add('hide')
-    scoreTimerEl.setAttribute("class", "score-page")
-    var textBox = document.createElement("input");
-    textBox.setAttribute("type", "text");
-    textBox.setAttribute("placeholder", "Your Initials");
-    textBox.setAttribute("class", "inputInitials")
-    // textBox.innerText = "Enter Your Initials " + textBox;
-    var submitBtn = document.createElement("button");
-    submitBtn.setAttribute("text", "submit");
-    submitBtn.innerText = "Submit";
-    submitBtn.setAttribute("class", "score-submit-btn");
+    if(showScorePageFlag)  {
+        showScorePageFlag = false; // Reset Flag
 
-    scoreTimerEl.appendChild(textBox);
-    scoreTimerEl.appendChild(submitBtn);
+        timerEl.classList.add('hide');
+        questionWrapperEl.classList.add('hide')
+        scoreTimerEl.setAttribute("class", "score-page")
+        var textBox = document.createElement("input");
+        textBox.setAttribute("type", "text");
+        textBox.setAttribute("id", "textBox");
+        textBox.setAttribute("placeholder", "Your Initials");
+        textBox.setAttribute("class", "inputInitials");
+        var submitBtn = document.createElement("button");
+        submitBtn.setAttribute("text", "submit");
+        submitBtn.innerText = "Submit";
+        submitBtn.setAttribute("class", "score-submit-btn");
+        submitBtn.setAttribute("id", "submitBtn");
 
-    submitBtn.addEventListener("click", setInitials);
+
+        scoreTimerEl.appendChild(textBox);
+        scoreTimerEl.appendChild(submitBtn);
+
+        // not able to pass the below function
+        submitBtn.setAttribute("onclick", "saveInitials()");
+    }
 }
-// showQuestion(questions[0]);
 
-function setInitials() {
-    localStorage.setItem("score", JSON.stringify(score));
+function saveInitials() { 
+    var initials = textBox.value;
+    if (initials) {
+        localStorage.setItem(initials, JSON.stringify(score));
+    }
+    highScore()
+}
+
+function highScore() {
+    // Hide Previous Page
+    var textBox = document.getElementById("textBox");
+    textBox.classList.add("hide");
+
+    var submitBtn = document.getElementById("submitBtn");
+    submitBtn.classList.add("hide");
+    scoreEl.classList.add("hide");
+
+    // Build High Score Page
+    var highScoreDisplay = document.getElementById("high-score");
+    highScoreDisplay.setAttribute("class", "highScoreDisplay");
+
+    var highScoreHeading = document.createElement("h3");
+    highScoreHeading.setAttribute("id", "highScoreHeading")
+    highScoreHeading.innerText = "High Score" 
+
+    var highScore = document.createElement("div")
+    highScore.setAttribute("id", "highScore");
+
+    highScoreDisplay.appendChild(highScoreHeading);
+    highScoreDisplay.appendChild(highScore);
+    document.body.appendChild(highScoreDisplay);
+
+    for (var i = 0; i < localStorage.length; i++) {
+        var initials = localStorage.key(i);
+        var score = JSON.parse(localStorage.getItem(initials));
+
+        highScore.innerHTML += `${initials} : ${score} <br/>`;
+
+        // if(!initials || !score) {
+        //     highScore = "";
+        // }
+
+    }
+
+    var btnDiv = document.createElement("div")
+    btnDiv.setAttribute("id", "btnDiv");
+    var clearBtn = document.createElement("button");
+    clearBtn.setAttribute("id", "clearBtn");
+    clearBtn.innerText = "Clear"
+    var resetBtn = document.createElement("button");
+    resetBtn.setAttribute("id", "resetBtn");
+    resetBtn.innerText = "Go Back";
+
+    btnDiv.appendChild(clearBtn);
+    btnDiv.appendChild(resetBtn);
+    highScoreDisplay.appendChild(btnDiv);  
+
+    clearBtn.addEventListener("click", () => {
+        localStorage.clear();
+        highScore.innerHTML = "  ";
+    });
+
+    resetBtn.addEventListener("click", () => {
+        location.reload();
+    });
 }
