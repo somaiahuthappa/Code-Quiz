@@ -1,8 +1,10 @@
+// global variables
 var score = 0;
 var questAsked = 0;
 let time = 40; //seconds
 var showScorePageFlag = false;
 
+// questions array
 var questions = [
     {
         question: 'How to align an element to the top of its parent in CSS?',
@@ -58,6 +60,7 @@ var questions = [
 
 ];
 
+// dynamic variables using ids
 var startButtonEl = document.getElementById('start');
 var mainContentEl = document.getElementById('main-content');
 var scoreTimerEl = document.getElementById('score-timer-wrapper')
@@ -73,68 +76,83 @@ var answerB = document.getElementById('answerB');
 var answerC = document.getElementById('answerC');
 var answerD = document.getElementById('answerD');
 
+// click start button 
 startButtonEl.addEventListener('click', start);
 
+// hides start page elements
 function start() {
+    // hides previous page
     startButtonEl.classList.add('hide');
     introEl.classList.add('hide');
     scoreTimerEl.classList.remove('hide');
     questionWrapperEl.classList.remove('hide');
+    // calls the following functions
     countDown();
     scoreCounter();
     showQuestion();
 
 }
 
+// Shows the score
 function scoreCounter() {
     scoreEl.innerHTML = "Score: " + score;
 }
 
+// starts countdown
 function countDown() {
-    var timer = setInterval(function function1() { 
+    var timer = setInterval(function () {
         timerEl.innerHTML = "Timer: " + time + " seconds";
-        time-=1 
-
-        if (time <= -1) {
-            clearInterval(timer);            
+        time -= 1
+        //  if time runs out show score page
+        if ((questions.length === questAsked) || (time <= -1)) {
+            clearInterval(timer);
             showScorePageFlag = true;
             showScorePage();
         }
-         
+
     }, 1000);
 
 }
 
+// reduces time when a wrong answer is clicked
 function reduceTime() {
     time -= 10
 }
 
+// creates buttons and displays questions in the buttons
 function showQuestion() {
-    // Print question
-    questionEl.innerText = questions[questAsked].question;
 
-    // Print Answers
-    answerA.innerText = questions[questAsked].answers["a"];
-    answerB.innerText = questions[questAsked].answers["b"];
-    answerC.innerText = questions[questAsked].answers["c"];
-    answerD.innerText = questions[questAsked].answers["d"];
+    if (questions.length === questAsked) {
+        return
+    } else {
+        // Print question
+        questionEl.innerText = questions[questAsked].question;
 
-    // Reset Class
-    answerA.setAttribute('class', '');
-    answerB.setAttribute('class', '');
-    answerC.setAttribute('class', '');
-    answerD.setAttribute('class', '');
+        // Print Answers
+        answerA.innerText = questions[questAsked].answers["a"];
+        answerB.innerText = questions[questAsked].answers["b"];
+        answerC.innerText = questions[questAsked].answers["c"];
+        answerD.innerText = questions[questAsked].answers["d"];
 
-    // Add OnClick
-    answerA.setAttribute("onclick", "checkAnswer('a', questions[questAsked].correct, answerA)");
-    answerB.setAttribute("onclick", "checkAnswer('b', questions[questAsked].correct, answerB)");
-    answerC.setAttribute("onclick", "checkAnswer('c', questions[questAsked].correct, answerC)");
-    answerD.setAttribute("onclick", "checkAnswer('d', questions[questAsked].correct, answerD)");
+        // Reset Class
+        answerA.setAttribute('class', '');
+        answerB.setAttribute('class', '');
+        answerC.setAttribute('class', '');
+        answerD.setAttribute('class', '');
+
+        // Add OnClick
+        answerA.setAttribute("onclick", "checkAnswer('a', questions[questAsked].correct)");
+        answerB.setAttribute("onclick", "checkAnswer('b', questions[questAsked].correct)");
+        answerC.setAttribute("onclick", "checkAnswer('c', questions[questAsked].correct)");
+        answerD.setAttribute("onclick", "checkAnswer('d', questions[questAsked].correct)");
+
+    }
 }
 
-function checkAnswer(selectedAns, correctAns, correctElement) {
+// checks if answers are correct
+function checkAnswer(selectedAns, correctAns) {
 
-    // If Correct
+    // If Correct answer is selected
     if (selectedAns === correctAns) {
         score += 5;
         scoreCounter();
@@ -145,26 +163,16 @@ function checkAnswer(selectedAns, correctAns, correctElement) {
     };
 
 
-    // Increment to next question
     questAsked += 1;
+    showQuestion();
 
-    // Show next question only if maximum number of questions has not been reached
-    if ((questions.length === questAsked) || (time <= -1 )) {
-        
-        showScorePageFlag = true;
-        showScorePage();
-        // showScorePageFlag = true;
-        
-    }
-    else {
-        showQuestion();
-    };
 }
 
+// Displays the score page
 function showScorePage() {
-    if(showScorePageFlag)  {
+    if (showScorePageFlag) {
         showScorePageFlag = false; // Reset Flag
-
+        // hides previous page and creates score page
         timerEl.classList.add('hide');
         questionWrapperEl.classList.add('hide')
         scoreTimerEl.setAttribute("class", "score-page")
@@ -183,19 +191,21 @@ function showScorePage() {
         scoreTimerEl.appendChild(textBox);
         scoreTimerEl.appendChild(submitBtn);
 
-        // not able to pass the below function
         submitBtn.setAttribute("onclick", "saveInitials()");
     }
 }
 
-function saveInitials() { 
+// saves initials to local storage
+function saveInitials() {
     var initials = textBox.value;
     if (initials) {
         localStorage.setItem(initials, JSON.stringify(score));
     }
+
     highScore()
 }
 
+// displays high scores
 function highScore() {
     // Hide Previous Page
     var textBox = document.getElementById("textBox");
@@ -211,7 +221,7 @@ function highScore() {
 
     var highScoreHeading = document.createElement("h3");
     highScoreHeading.setAttribute("id", "highScoreHeading")
-    highScoreHeading.innerText = "High Score" 
+    highScoreHeading.innerText = "High Score"
 
     var highScore = document.createElement("div")
     highScore.setAttribute("id", "highScore");
@@ -220,18 +230,16 @@ function highScore() {
     highScoreDisplay.appendChild(highScore);
     document.body.appendChild(highScoreDisplay);
 
+    // display high score from local storage
     for (var i = 0; i < localStorage.length; i++) {
         var initials = localStorage.key(i);
         var score = JSON.parse(localStorage.getItem(initials));
 
         highScore.innerHTML += `${initials} : ${score} <br/>`;
 
-        // if(!initials || !score) {
-        //     highScore = "";
-        // }
-
     }
 
+    // create reset and clear buttons
     var btnDiv = document.createElement("div")
     btnDiv.setAttribute("id", "btnDiv");
     var clearBtn = document.createElement("button");
@@ -243,13 +251,15 @@ function highScore() {
 
     btnDiv.appendChild(clearBtn);
     btnDiv.appendChild(resetBtn);
-    highScoreDisplay.appendChild(btnDiv);  
+    highScoreDisplay.appendChild(btnDiv);
 
+    // clear high score
     clearBtn.addEventListener("click", () => {
         localStorage.clear();
         highScore.innerHTML = "  ";
     });
 
+    // return to start page 
     resetBtn.addEventListener("click", () => {
         location.reload();
     });

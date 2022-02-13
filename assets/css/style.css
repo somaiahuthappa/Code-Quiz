@@ -3,7 +3,7 @@
     margin:0;
     box-sizing: border-box;
 }
-
+/* body style */
 body{
     height:100vw;
     width: 100vw;
@@ -16,7 +16,7 @@ body{
 
 }
 
-
+/* header style */
 header {
     display:flex;
     align-items: center;
@@ -31,7 +31,7 @@ header h1 {
     font-size: 48px;
     color: navy;
 }
-
+/* Start page style */
 .intro {
     display: flex;
     align-items: center;
@@ -48,6 +48,7 @@ header h1 {
     border: solid grey 5px;
 }
 
+/* Style for the score and timer */
 .score-timer-wrapper {
     display: flex;
     justify-content: space-between;
@@ -55,6 +56,7 @@ header h1 {
     margin: 20px;
 }
 
+/* Question wrapper style */
 .question-wrapper {
     width: 800px;
     max-width: 100%;
@@ -70,6 +72,7 @@ header h1 {
     
 }
 
+/* Questions style */
 .question-wrapper .question {
     background-color: white;
     margin: 20px;
@@ -79,6 +82,7 @@ header h1 {
 
 }
 
+/* Answers style */
 .answer-list{
     display: grid;
     padding: 20px;
@@ -98,16 +102,7 @@ header h1 {
     opacity: 0.6;
 }
 
-.btn-wrong {
-background-color: red;
-color: white;
-}
-
-.btn-correct {
-    background-color: darkgreen;
-    color: white;
-}
-
+/* buttons style */
 .controls {
     display: flex;
     align-items: center;
@@ -134,6 +129,7 @@ color: white;
     display: none;
 }
 
+/* high score page style */
 .score-page {
     display: flex;
     flex-direction: column;
@@ -142,18 +138,13 @@ color: white;
     padding: 10px;
 }
 
-.score-submit-btn, #clearBtn, #resetBtn {
-    padding: 5px 10px;
-    border: solid grey 3px;
-    border-radius: 5px;
-    font-size: 17px;
-}
-
+/* Initials page style */
 .inputInitials {
     padding: 12px 20px;
     margin: 10px 0;
 }
 
+/* High score page style */
 #highScoreHeading{
     padding:20px;
     margin:10px;
@@ -168,6 +159,14 @@ color: white;
     align-items:center;
     width:100%;
     background-color: lightblue;
+}
+
+/* high score page's buttons style */
+.score-submit-btn, #clearBtn, #resetBtn {
+    padding: 5px 10px;
+    border: solid grey 3px;
+    border-radius: 5px;
+    font-size: 17px;
 }
 
 #btnDiv {
