@@ -11,8 +11,8 @@
 - Must be able to return to start page
 
 ## Links to the site
-- 
-- 
+- https://github.com/somaiahuthappa/Code-Quiz
+- https://somaiahuthappa.github.io/Code-Quiz/ 
 
 ## Screenshots
 ![This is a screenshot](/assets/images/screenshot.PNG)
