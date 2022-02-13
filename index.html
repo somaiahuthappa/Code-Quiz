@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Quiz</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+
+    <div>
+        <!-- 1st Page content -->
+        <header>
+            <h1>Code Quiz</h1>
+        </header>
+        <main class="main-content" id="main-content">
+            <section id="intro" class="intro">
+                <p>Welcome to the Code Quiz. When you click the right answer, you get 5 points. If you choose the wrong answer, you loose 10 seconds on the timer. You have 40 seconds to complete the quiz. At the end
+                    of the quiz, your score will be displayed and you can view the high score.</p>
+            </section>
+<!-- Timer and Score -->
+            <section class="score-timer-wrapper hide" id="score-timer-wrapper">
+                <span class="score">
+                    <h2 id="score">Score:</h2>
+                </span>
+                <span class="timer">
+                    <h2 id="timer"></h2>
+                </span>
+            </section>
+<!-- Question format -->
+            <section class="question-wrapper hide" id="question-wrapper">
+                <h3 class="question" id="question">Question</h3>
+                <div class="answer-list" id="answer-list">
+
+                    <button class="btn" id="answerA">Answer1</button>
+
+                    <button class="btn" id="answerB">Answer2</button>
+
+                    <button class="btn" id="answerC">Answer3</button>
+
+                    <button class="btn" id="answerD">Answer4</button>
+
+                </div>
+                <div id="high-score">
+                </div>
+            </section>
+<!-- buttons -->
+            <section class="controls" id="controls">
+
+                <button id="start" class="controls-btn">Start</button>
+
+                <button id="submit" class="submit-btn controls-btn hide">Submit</button>
+
+                <button id="clear-high-score" class="clear-high-score-btn controls-btn hide">Clear</button>
+
+                <button id="go-back" class="go-back-btn controls-btn hide">Go Back</button>
+
+            </section>
+
+        </main>
+    </div>
+<!-- Link to JS -->
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>

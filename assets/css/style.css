@@ -1,0 +1,177 @@
+* {
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+/* body style */
+body{
+    height:100vw;
+    width: 100vw;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    background-color: lightgrey;
+    
+
+}
+
+/* header style */
+header {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+
+}
+
+header h1 {
+    padding: 20px;
+    font-size: 48px;
+    color: navy;
+}
+/* Start page style */
+.intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro p {
+    width: 70%;
+    line-height: 1.5;
+    font-size: 20px;
+    padding: 20px;
+    background-color: lightblue;
+    border-radius: 5px;
+    border: solid grey 5px;
+}
+
+/* Style for the score and timer */
+.score-timer-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding:10px;
+    margin: 20px;
+}
+
+/* Question wrapper style */
+.question-wrapper {
+    width: 800px;
+    max-width: 100%;
+    height: 600px;
+    max-height: 60%;
+    background-color: lightblue;
+    border: 5px solid darkblue;
+    border-radius: 5%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+/* Questions style */
+.question-wrapper .question {
+    background-color: white;
+    margin: 20px;
+    border: 3px solid grey;
+    border-radius: 20px;
+    padding: 20px;
+
+}
+
+/* Answers style */
+.answer-list{
+    display: grid;
+    padding: 20px;
+}
+
+.answer-list button {
+    padding: 20px;
+    border: 3px solid grey ;
+    border-radius: 20px;
+    margin: 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.answer-list button:hover {
+    background-color:darksalmon;
+    opacity: 0.6;
+}
+
+/* buttons style */
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+}
+
+.controls-btn {
+    padding: 10px 20px;
+    border: solid grey 3px;
+    border-radius: 20px;
+    margin: 20px;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.controls-btn:hover {
+    opacity: 0.6;
+    background-color:lightpink;
+}
+
+.hide {
+    display: none;
+}
+
+/* high score page style */
+.score-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 10px;
+}
+
+/* Initials page style */
+.inputInitials {
+    padding: 12px 20px;
+    margin: 10px 0;
+}
+
+/* High score page style */
+#highScoreHeading{
+    padding:20px;
+    margin:10px;
+}
+
+#highScoreDisplay {
+    width: 60%;
+}
+
+#highScore {
+    display:flex;
+    align-items:center;
+    width:100%;
+    background-color: lightblue;
+}
+
+/* high score page's buttons style */
+.score-submit-btn, #clearBtn, #resetBtn {
+    padding: 5px 10px;
+    border: solid grey 3px;
+    border-radius: 5px;
+    font-size: 17px;
+}
+
+#btnDiv {
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    width: 100%;
+}
